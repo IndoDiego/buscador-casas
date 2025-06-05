@@ -1,5 +1,4 @@
 const axios = require('axios');
-require('dotenv').config({ path: '../credential.env' });
 
 module.exports = async (req, res) => {
   if (req.method !== 'POST') {
