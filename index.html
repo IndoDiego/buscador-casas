@@ -283,15 +283,40 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1>🏠 Consultor de Ventas Inmobiliarias</h1>
-            <p>Descubre por cuánto se han vendido las propiedades en tu zona</p>
+            <h1>🏠 Consultor de Ventas Inmobiliarias - Málaga Capital</h1>
+            <p>Descubre por cuánto se han vendido las propiedades en Málaga</p>
         </div>
 
         <div class="search-section">
             <form class="search-form" id="searchForm">
                 <div class="form-group">
                     <label for="address">Dirección de la propiedad</label>
-                    <input type="text" id="address" name="address" placeholder="Ej: Calle Gran Vía 25, Madrid" required>
+                    <input type="text" id="address" name="address" placeholder="Ej: Calle Larios 12, Avenida Andalucía 25..." required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="postalCode">Código Postal</label>
+                    <select id="postalCode" name="postalCode" required>
+                        <option value="">Selecciona código postal</option>
+                        <option value="29001">29001 - Centro Histórico</option>
+                        <option value="29002">29002 - La Malagueta</option>
+                        <option value="29003">29003 - Perchel Norte</option>
+                        <option value="29004">29004 - Trinidad</option>
+                        <option value="29005">29005 - Carretera de Cádiz</option>
+                        <option value="29006">29006 - Teatinos</option>
+                        <option value="29007">29007 - Cruz de Humilladero</option>
+                        <option value="29008">29008 - Carlinda</option>
+                        <option value="29009">29009 - Campanillas</option>
+                        <option value="29010">29010 - Puerto de la Torre</option>
+                        <option value="29011">29011 - Churriana</option>
+                        <option value="29012">29012 - El Palo</option>
+                        <option value="29013">29013 - Pedregalejo</option>
+                        <option value="29014">29014 - Huelin</option>
+                        <option value="29015">29015 - Ciudad Jardín</option>
+                        <option value="29016">29016 - Carretera de Almería</option>
+                        <option value="29017">29017 - Pinares de San Antón</option>
+                        <option value="29018">29018 - Parque Mediterráneo</option>
+                    </select>
                 </div>
                 
                 <div class="form-group">
@@ -303,6 +328,7 @@
                         <option value="chalet">Chalet</option>
                         <option value="duplex">Dúplex</option>
                         <option value="atico">Ático</option>
+                        <option value="estudio">Estudio</option>
                     </select>
                 </div>
                 
@@ -335,62 +361,175 @@
     </div>
 
     <script>
-        // Base de datos simulada de ventas inmobiliarias
+        // Base de datos simulada de ventas inmobiliarias en Málaga Capital
         const salesDatabase = [
             {
-                address: "Calle Gran Vía 25, Madrid",
+                address: "Calle Larios 15",
+                postalCode: "29001",
+                zone: "Centro Histórico",
+                province: "Málaga",
                 type: "piso",
+                salePrice: 285000,
+                originalPrice: 310000,
+                bedrooms: 3,
+                bathrooms: 2,
+                area: 85,
+                saleDate: "2024-11-20",
+                daysOnMarket: 78
+            },
+            {
+                address: "Avenida Andalucía 124",
+                postalCode: "29007",
+                zone: "Cruz de Humilladero",
+                province: "Málaga",
+                type: "piso",
+                salePrice: 195000,
+                originalPrice: 210000,
+                bedrooms: 2,
+                bathrooms: 1,
+                area: 68,
+                saleDate: "2024-12-01",
+                daysOnMarket: 45
+            },
+            {
+                address: "Calle Alcazabilla 8",
+                postalCode: "29001",
+                zone: "Centro Histórico",
+                province: "Málaga",
+                type: "atico",
                 salePrice: 485000,
-                originalPrice: 520000,
+                originalPrice: 465000,
                 bedrooms: 3,
                 bathrooms: 2,
                 area: 95,
+                saleDate: "2024-10-15",
+                daysOnMarket: 23
+            },
+            {
+                address: "Paseo de la Farola 45",
+                postalCode: "29002",
+                zone: "La Malagueta",
+                province: "Málaga",
+                type: "piso",
+                salePrice: 425000,
+                originalPrice: 450000,
+                bedrooms: 3,
+                bathrooms: 2,
+                area: 105,
+                saleDate: "2024-11-08",
+                daysOnMarket: 67
+            },
+            {
+                address: "Calle Trinidad Grund 22",
+                postalCode: "29001",
+                zone: "Centro Histórico",
+                province: "Málaga",
+                type: "estudio",
+                salePrice: 125000,
+                originalPrice: 135000,
+                bedrooms: 1,
+                bathrooms: 1,
+                area: 35,
+                saleDate: "2024-12-10",
+                daysOnMarket: 89
+            },
+            {
+                address: "Avenida de Velázquez 156",
+                postalCode: "29004",
+                zone: "Trinidad",
+                province: "Málaga",
+                type: "duplex",
+                salePrice: 385000,
+                originalPrice: 375000,
+                bedrooms: 4,
+                bathrooms: 3,
+                area: 130,
+                saleDate: "2024-09-25",
+                daysOnMarket: 34
+            },
+            {
+                address: "Calle Pedregalejo 89",
+                postalCode: "29013",
+                zone: "Pedregalejo",
+                province: "Málaga",
+                type: "piso",
+                salePrice: 295000,
+                originalPrice: 315000,
+                bedrooms: 2,
+                bathrooms: 2,
+                area: 78,
+                saleDate: "2024-11-30",
+                daysOnMarket: 56
+            },
+            {
+                address: "Avenida Juan Sebastián Elcano 167",
+                postalCode: "29012",
+                zone: "El Palo",
+                province: "Málaga",
+                type: "chalet",
+                salePrice: 535000,
+                originalPrice: 520000,
+                bedrooms: 4,
+                bathrooms: 3,
+                area: 165,
+                saleDate: "2024-10-12",
+                daysOnMarket: 78
+            },
+            {
+                address: "Calle Comandante Benítez 45",
+                postalCode: "29001",
+                zone: "Centro Histórico",
+                province: "Málaga",
+                type: "piso",
+                salePrice: 215000,
+                originalPrice: 235000,
+                bedrooms: 2,
+                bathrooms: 1,
+                area: 65,
+                saleDate: "2024-12-05",
+                daysOnMarket: 92
+            },
+            {
+                address: "Paseo del Parque 12",
+                postalCode: "29015",
+                zone: "Ciudad Jardín",
+                province: "Málaga",
+                type: "atico",
+                salePrice: 675000,
+                originalPrice: 645000,
+                bedrooms: 4,
+                bathrooms: 3,
+                area: 145,
+                saleDate: "2024-09-18",
+                daysOnMarket: 45
+            },
+            {
+                address: "Calle Carretería 78",
+                postalCode: "29008",
+                zone: "Carlinda",
+                province: "Málaga",
+                type: "piso",
+                salePrice: 165000,
+                originalPrice: 175000,
+                bedrooms: 3,
+                bathrooms: 1,
+                area: 72,
                 saleDate: "2024-11-15",
                 daysOnMarket: 67
             },
             {
-                address: "Calle Serrano 123, Madrid",
-                type: "atico",
-                salePrice: 890000,
-                originalPrice: 850000,
-                bedrooms: 4,
-                bathrooms: 3,
-                area: 135,
-                saleDate: "2024-10-28",
-                daysOnMarket: 23
-            },
-            {
-                address: "Calle Alcalá 456, Madrid",
+                address: "Avenida de los Guindos 234",
+                postalCode: "29004",
+                zone: "Trinidad",
+                province: "Málaga",
                 type: "piso",
-                salePrice: 320000,
-                originalPrice: 350000,
-                bedrooms: 2,
-                bathrooms: 1,
-                area: 75,
-                saleDate: "2024-12-03",
-                daysOnMarket: 89
-            },
-            {
-                address: "Paseo de la Castellana 789, Madrid",
-                type: "duplex",
-                salePrice: 1250000,
-                originalPrice: 1200000,
-                bedrooms: 5,
-                bathrooms: 4,
-                area: 180,
-                saleDate: "2024-09-12",
-                daysOnMarket: 45
-            },
-            {
-                address: "Calle Velázquez 34, Madrid",
-                type: "piso",
-                salePrice: 675000,
-                originalPrice: 695000,
+                salePrice: 245000,
+                originalPrice: 255000,
                 bedrooms: 3,
                 bathrooms: 2,
-                area: 110,
-                saleDate: "2024-11-08",
-                daysOnMarket: 34
+                area: 88,
+                saleDate: "2024-10-28",
+                daysOnMarket: 41
             }
         ];
 
@@ -416,7 +555,14 @@
         function performSearch() {
             const formData = new FormData(searchForm);
             const searchAddress = formData.get('address').toLowerCase();
+            const searchPostalCode = formData.get('postalCode');
             const searchType = formData.get('propertyType');
+
+            // Validar que se haya seleccionado código postal
+            if (!searchPostalCode) {
+                alert('Por favor, selecciona un código postal de Málaga');
+                return;
+            }
 
             // Mostrar loading
             loading.style.display = 'block';
@@ -425,12 +571,14 @@
 
             // Simular delay de búsqueda
             setTimeout(() => {
-                // Filtrar resultados
+                // Filtrar resultados por código postal y dirección
                 currentResults = salesDatabase.filter(property => {
-                    const addressMatch = property.address.toLowerCase().includes(searchAddress) || 
-                                       searchAddress.includes(property.address.toLowerCase().split(',')[0].toLowerCase());
+                    const postalCodeMatch = property.postalCode === searchPostalCode;
+                    const addressMatch = !searchAddress || 
+                                       property.address.toLowerCase().includes(searchAddress) || 
+                                       searchAddress.includes(property.address.toLowerCase().split(' ')[1]?.toLowerCase() || '');
                     const typeMatch = !searchType || property.type === searchType;
-                    return addressMatch && typeMatch;
+                    return postalCodeMatch && addressMatch && typeMatch;
                 });
 
                 loading.style.display = 'none';
@@ -456,7 +604,7 @@
                         <div class="property-header">
                             <div>
                                 <div class="property-address">${property.address}</div>
-                                <div class="property-type">${getPropertyTypeText(property.type)}</div>
+                                <div class="property-type">${getPropertyTypeText(property.type)} • ${property.zone} • CP: ${property.postalCode}</div>
                             </div>
                             <div>
                                 ${property.originalPrice !== property.salePrice ? 
@@ -474,14 +622,14 @@
                                 <svg class="detail-icon" viewBox="0 0 24 24">
                                     <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/>
                                 </svg>
-                                <span>${property.bedrooms} dormitorios</span>
+                                <span>${property.bedrooms} dormitorio${property.bedrooms !== 1 ? 's' : ''}</span>
                             </div>
                             <div class="detail-item">
                                 <svg class="detail-icon" viewBox="0 0 24 24">
                                     <circle cx="12" cy="12" r="3"/>
                                     <path d="M12 1v6m0 6v6m11-7h-6m-6 0H1"/>
                                 </svg>
-                                <span>${property.bathrooms} baños</span>
+                                <span>${property.bathrooms} baño${property.bathrooms !== 1 ? 's' : ''}</span>
                             </div>
                             <div class="detail-item">
                                 <svg class="detail-icon" viewBox="0 0 24 24">
@@ -545,7 +693,8 @@
                 'casa': 'Casa',
                 'chalet': 'Chalet',
                 'duplex': 'Dúplex',
-                'atico': 'Ático'
+                'atico': 'Ático',
+                'estudio': 'Estudio'
             };
             return types[type] || type;
         }
@@ -562,7 +711,7 @@
         // Agregar algunas direcciones de ejemplo al hacer clic en el input
         document.getElementById('address').addEventListener('focus', function() {
             if (this.value === '') {
-                this.placeholder = 'Prueba: Gran Vía, Serrano, Alcalá...';
+                this.placeholder = 'Prueba: Larios, Alcazabilla, Farola, Trinidad...';
             }
         });
     </script>
