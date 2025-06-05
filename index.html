@@ -295,28 +295,8 @@
                 </div>
                 
                 <div class="form-group">
-                    <label for="postalCode">Código Postal</label>
-                    <select id="postalCode" name="postalCode" required>
-                        <option value="">Selecciona código postal</option>
-                        <option value="29001">29001 - Centro Histórico</option>
-                        <option value="29002">29002 - La Malagueta</option>
-                        <option value="29003">29003 - Perchel Norte</option>
-                        <option value="29004">29004 - Trinidad</option>
-                        <option value="29005">29005 - Carretera de Cádiz</option>
-                        <option value="29006">29006 - Teatinos</option>
-                        <option value="29007">29007 - Cruz de Humilladero</option>
-                        <option value="29008">29008 - Carlinda</option>
-                        <option value="29009">29009 - Campanillas</option>
-                        <option value="29010">29010 - Puerto de la Torre</option>
-                        <option value="29011">29011 - Churriana</option>
-                        <option value="29012">29012 - El Palo</option>
-                        <option value="29013">29013 - Pedregalejo</option>
-                        <option value="29014">29014 - Huelin</option>
-                        <option value="29015">29015 - Ciudad Jardín</option>
-                        <option value="29016">29016 - Carretera de Almería</option>
-                        <option value="29017">29017 - Pinares de San Antón</option>
-                        <option value="29018">29018 - Parque Mediterráneo</option>
-                    </select>
+                    <label for="location">Código Postal y Ciudad</label>
+                    <input type="text" id="location" name="location" placeholder="Ej: 29001 Málaga" required>
                 </div>
                 
                 <div class="form-group">
@@ -333,6 +313,7 @@
                 </div>
                 
                 <button type="submit" class="search-btn">🔍 Buscar Ventas</button>
+                <button type="button" class="search-btn" id="testApiBtn" style="background: #28a745;">🧪 Probar API</button>
             </form>
         </div>
 
@@ -361,177 +342,71 @@
     </div>
 
     <script>
-        // Base de datos simulada de ventas inmobiliarias en Málaga Capital
-        const salesDatabase = [
-            {
-                address: "Calle Larios 15",
-                postalCode: "29001",
-                zone: "Centro Histórico",
-                province: "Málaga",
-                type: "piso",
-                salePrice: 285000,
-                originalPrice: 310000,
-                bedrooms: 3,
-                bathrooms: 2,
-                area: 85,
-                saleDate: "2024-11-20",
-                daysOnMarket: 78
-            },
-            {
-                address: "Avenida Andalucía 124",
-                postalCode: "29007",
-                zone: "Cruz de Humilladero",
-                province: "Málaga",
-                type: "piso",
-                salePrice: 195000,
-                originalPrice: 210000,
-                bedrooms: 2,
-                bathrooms: 1,
-                area: 68,
-                saleDate: "2024-12-01",
-                daysOnMarket: 45
-            },
-            {
-                address: "Calle Alcazabilla 8",
-                postalCode: "29001",
-                zone: "Centro Histórico",
-                province: "Málaga",
-                type: "atico",
-                salePrice: 485000,
-                originalPrice: 465000,
-                bedrooms: 3,
-                bathrooms: 2,
-                area: 95,
-                saleDate: "2024-10-15",
-                daysOnMarket: 23
-            },
-            {
-                address: "Paseo de la Farola 45",
-                postalCode: "29002",
-                zone: "La Malagueta",
-                province: "Málaga",
-                type: "piso",
-                salePrice: 425000,
-                originalPrice: 450000,
-                bedrooms: 3,
-                bathrooms: 2,
-                area: 105,
-                saleDate: "2024-11-08",
-                daysOnMarket: 67
-            },
-            {
-                address: "Calle Trinidad Grund 22",
-                postalCode: "29001",
-                zone: "Centro Histórico",
-                province: "Málaga",
-                type: "estudio",
-                salePrice: 125000,
-                originalPrice: 135000,
-                bedrooms: 1,
-                bathrooms: 1,
-                area: 35,
-                saleDate: "2024-12-10",
-                daysOnMarket: 89
-            },
-            {
-                address: "Avenida de Velázquez 156",
-                postalCode: "29004",
-                zone: "Trinidad",
-                province: "Málaga",
-                type: "duplex",
-                salePrice: 385000,
-                originalPrice: 375000,
-                bedrooms: 4,
-                bathrooms: 3,
-                area: 130,
-                saleDate: "2024-09-25",
-                daysOnMarket: 34
-            },
-            {
-                address: "Calle Pedregalejo 89",
-                postalCode: "29013",
-                zone: "Pedregalejo",
-                province: "Málaga",
-                type: "piso",
-                salePrice: 295000,
-                originalPrice: 315000,
-                bedrooms: 2,
-                bathrooms: 2,
-                area: 78,
-                saleDate: "2024-11-30",
-                daysOnMarket: 56
-            },
-            {
-                address: "Avenida Juan Sebastián Elcano 167",
-                postalCode: "29012",
-                zone: "El Palo",
-                province: "Málaga",
-                type: "chalet",
-                salePrice: 535000,
-                originalPrice: 520000,
-                bedrooms: 4,
-                bathrooms: 3,
-                area: 165,
-                saleDate: "2024-10-12",
-                daysOnMarket: 78
-            },
-            {
-                address: "Calle Comandante Benítez 45",
-                postalCode: "29001",
-                zone: "Centro Histórico",
-                province: "Málaga",
-                type: "piso",
-                salePrice: 215000,
-                originalPrice: 235000,
-                bedrooms: 2,
-                bathrooms: 1,
-                area: 65,
-                saleDate: "2024-12-05",
-                daysOnMarket: 92
-            },
-            {
-                address: "Paseo del Parque 12",
-                postalCode: "29015",
-                zone: "Ciudad Jardín",
-                province: "Málaga",
-                type: "atico",
-                salePrice: 675000,
-                originalPrice: 645000,
-                bedrooms: 4,
-                bathrooms: 3,
-                area: 145,
-                saleDate: "2024-09-18",
-                daysOnMarket: 45
-            },
-            {
-                address: "Calle Carretería 78",
-                postalCode: "29008",
-                zone: "Carlinda",
-                province: "Málaga",
-                type: "piso",
-                salePrice: 165000,
-                originalPrice: 175000,
-                bedrooms: 3,
-                bathrooms: 1,
-                area: 72,
-                saleDate: "2024-11-15",
-                daysOnMarket: 67
-            },
-            {
-                address: "Avenida de los Guindos 234",
-                postalCode: "29004",
-                zone: "Trinidad",
-                province: "Málaga",
-                type: "piso",
-                salePrice: 245000,
-                originalPrice: 255000,
-                bedrooms: 3,
-                bathrooms: 2,
-                area: 88,
-                saleDate: "2024-10-28",
-                daysOnMarket: 41
+        // Configuración de la API
+        const API_CONFIG = {
+            baseUrl: 'https://api.goolzoom.com/v1',
+            apiKey: 'VLo1poQiPk4UpKM4kzZHj3W4HtKuV9zM3Vky0tqZ',
+            endpoints: {
+                propertySearch: '/properties/search',
+                propertyDetails: '/properties/details'
             }
-        ];
+        };
+
+        // Función para obtener datos de propiedades
+        async function fetchPropertyData(searchParams) {
+            try {
+                const response = await fetch(`${API_CONFIG.baseUrl}${API_CONFIG.endpoints.propertySearch}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-API-Key': API_CONFIG.apiKey
+                    },
+                    body: JSON.stringify({
+                        location: searchParams.location,
+                        address: searchParams.address,
+                        propertyType: searchParams.propertyType,
+                        dateRange: {
+                            start: new Date(new Date().setFullYear(new Date().getFullYear() - 5)).toISOString(),
+                            end: new Date().toISOString()
+                        },
+                        filters: {
+                            city: 'Málaga',
+                            transactionType: 'sale',
+                            source: 'goolzoom'
+                        }
+                    })
+                });
+
+                if (!response.ok) {
+                    throw new Error('Error en la conexión con la API de Goolzoom');
+                }
+
+                return await response.json();
+            } catch (error) {
+                console.error('Error fetching property data:', error);
+                throw error;
+            }
+        }
+
+        // Función para obtener detalles adicionales de una propiedad
+        async function fetchPropertyDetails(propertyId) {
+            try {
+                const response = await fetch(`${API_CONFIG.baseUrl}${API_CONFIG.endpoints.propertyDetails}/${propertyId}`, {
+                    headers: {
+                        'X-API-Key': API_CONFIG.apiKey
+                    }
+                });
+
+                if (!response.ok) {
+                    throw new Error('Error al obtener detalles de la propiedad de Goolzoom');
+                }
+
+                return await response.json();
+            } catch (error) {
+                console.error('Error fetching property details:', error);
+                throw error;
+            }
+        }
 
         const searchForm = document.getElementById('searchForm');
         const loading = document.getElementById('loading');
@@ -552,15 +427,17 @@
             sortResults(this.value);
         });
 
-        function performSearch() {
+        async function performSearch() {
             const formData = new FormData(searchForm);
-            const searchAddress = formData.get('address').toLowerCase();
-            const searchPostalCode = formData.get('postalCode');
-            const searchType = formData.get('propertyType');
+            const searchParams = {
+                address: formData.get('address'),
+                location: formData.get('location'),
+                propertyType: formData.get('propertyType')
+            };
 
-            // Validar que se haya seleccionado código postal
-            if (!searchPostalCode) {
-                alert('Por favor, selecciona un código postal de Málaga');
+            // Validar que se haya ingresado ubicación
+            if (!searchParams.location) {
+                alert('Por favor, ingresa el código postal y ciudad');
                 return;
             }
 
@@ -569,17 +446,9 @@
             resultsSection.style.display = 'none';
             noResults.style.display = 'none';
 
-            // Simular delay de búsqueda
-            setTimeout(() => {
-                // Filtrar resultados por código postal y dirección
-                currentResults = salesDatabase.filter(property => {
-                    const postalCodeMatch = property.postalCode === searchPostalCode;
-                    const addressMatch = !searchAddress || 
-                                       property.address.toLowerCase().includes(searchAddress) || 
-                                       searchAddress.includes(property.address.toLowerCase().split(' ')[1]?.toLowerCase() || '');
-                    const typeMatch = !searchType || property.type === searchType;
-                    return postalCodeMatch && addressMatch && typeMatch;
-                });
+            try {
+                const results = await fetchPropertyData(searchParams);
+                currentResults = results.properties;
 
                 loading.style.display = 'none';
 
@@ -588,7 +457,11 @@
                 } else {
                     noResults.style.display = 'block';
                 }
-            }, 1500);
+            } catch (error) {
+                loading.style.display = 'none';
+                alert('Error al buscar propiedades. Por favor, intenta de nuevo más tarde.');
+                console.error('Search error:', error);
+            }
         }
 
         function displayResults(results) {
@@ -714,6 +587,41 @@
                 this.placeholder = 'Prueba: Larios, Alcazabilla, Farola, Trinidad...';
             }
         });
+
+        // Función para probar la conexión con la API
+        async function testApiConnection() {
+            const testBtn = document.getElementById('testApiBtn');
+            const originalText = testBtn.textContent;
+            
+            try {
+                testBtn.textContent = 'Probando conexión...';
+                testBtn.disabled = true;
+                
+                const testParams = {
+                    location: '29001 Málaga',
+                    address: 'Calle Larios',
+                    propertyType: 'piso'
+                };
+                
+                const results = await fetchPropertyData(testParams);
+                
+                if (results && results.properties) {
+                    alert('✅ Conexión exitosa con la API de Goolzoom\nSe encontraron ' + results.properties.length + ' propiedades');
+                    console.log('Datos de prueba:', results);
+                } else {
+                    throw new Error('No se recibieron datos válidos de la API');
+                }
+            } catch (error) {
+                alert('❌ Error en la conexión con la API: ' + error.message);
+                console.error('Error de prueba:', error);
+            } finally {
+                testBtn.textContent = originalText;
+                testBtn.disabled = false;
+            }
+        }
+
+        // Agregar evento al botón de prueba
+        document.getElementById('testApiBtn').addEventListener('click', testApiConnection);
     </script>
 </body>
 </html>
